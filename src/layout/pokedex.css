@@ -1,0 +1,27 @@
+.big-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 1px white solid;
+}
+.circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px white solid;
+}
+.green {
+  background-color: #4caf50; /* Verde */
+}
+
+.yellow {
+  background-color: #ffc107; /* Amarillo */
+}
+
+.blue {
+  background-color: #2196f3; /* Azul */
+}
+
+.red {
+  background-color: red;
+}
