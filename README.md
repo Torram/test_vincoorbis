@@ -1,34 +1,38 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Prueba Técnica Vinco Orbis
 
-## Getting Started
+## Liberías utilizadas
 
-First, run the development server:
+- NextJS
+- React
+- React DOM
+- Chart.js
+- React-chartjs-2
+- Bootstrap
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+### Información
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Proyecto creado con create-next-app. La información visualizada es obtenida de la API [POKE API](https://pokeapi.co). La información es guardada en el localStorage del navegador.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Busqué hacer una interfaz similar a un pokedex de Pókemon para representar la información. La estructura de la página está dividida en 2 partes, la parte izquierda es el buscador, constituido por un campo de búsqueda y una lista de resultados, scrolleable, de tamaño fijo. La parte de la derecha es la relacionada a las colecciones y a la gráfica.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Intenté hacer que toda la página fuera responsive. Procuré que no hubiera errores ni warnings pendientes de corregir.
 
-## Learn More
+En cuanto a la estructura de los directorios, busqué acomodarlos de una forma facilmente ubicables.
 
-To learn more about Next.js, take a look at the following resources:
+### Instrucciones
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Inicialmente la página mostrará espacios en blanco, para empezar a usarla, hay que crear una colección nueva, dando click al boton verde con el signo **+**, esto generará un elemento a la lista de colecciones.
+2. Ahora damos click al elemento recién creado, y nos mostrará una nueva sección, en la que se muestra la lista de pokemons de la colección actual.
+3. Ya que tenemos abierta la colección, podemos buscar un pokemon por nombre, procurando que esté bien escrito. Los resultados mostrarán todas las variantes del pokemon buscado.
+4. Cada ficha de resultados de la búsqueda, tiene un campo para escribir la cantidad que queremos agregar, junto al botón para agregar el pokemon a la colección. Debemos colocar un número válido.
+5. Los pokemons agregados a la colección, aparecen en la lista. Podemos editar la cantidad de cada pokemon en la lista. Si reducimos la cantidad a menos de **1** el pokemon debe desaparecer de la colección.
+6. En la parte superior podemos ver un botón con una flecha, que nos permite regresar a la lista de colecciones, y un botón rojo con una **X** que nos permite eliminar la colección completa.
+7. Si volvemos a la lista de colecciones, en la parte inferior podemos ver la gráfica que muestra el aumulado de cantidad de pokemons por cada tipo.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Problemas durante el desarrollo
 
-## Deploy on Vercel
+Inicialmente consideré utilizar el Context de React, o Redux, pero al final me pareció que estaría sobrado, así que pasé las funciones de control del state por props.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Trabajé en un equipo diferente a mi estación de trabajo normal, por lo que tuve algunos problemas para ajustar medidas en la pantalla, pero al final conseguí lo que esperaba.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Tuve problemas con la gráfica, sobre todo con lo de mostrar las leyendas y cantidades de los datos de la gráfica.
