@@ -4,7 +4,7 @@ import useSearchPokemon from "@/hooks/useSearchPokemon";
 import SearchList from "@/search/SearchList";
 import { useState } from "react";
 
-export default function LeftLayout() {
+export default function LeftLayout({ activeCollection, updateCollection }) {
   const { searchPokemon } = useSearchPokemon();
   const [name, setName] = useState("");
   const [list, setList] = useState([]);
@@ -59,10 +59,16 @@ export default function LeftLayout() {
         <Alert msg="Nombre inválido" type="danger" onClose={handleCloseAlert} />
       )}
       <div className="card mt-3">
-        <div className="card-header">Resultados</div>
+        <div className="card-header">
+          <b>Resultados</b>
+        </div>
       </div>
       <div className="bg-light card h-100 overflow-y-auto overflow-x-hidden">
-        <SearchList list={list} />
+        <SearchList
+          list={list}
+          activeCollection={activeCollection}
+          updateCollection={updateCollection}
+        />
       </div>
     </div>
   );

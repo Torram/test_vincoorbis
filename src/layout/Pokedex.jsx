@@ -1,9 +1,31 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import "./pokedex.css";
 import RightLayout from "./RightLayout";
 import LeftLayout from "./LeftLayout";
+import Collection from "@/collections/Collection";
 
 export default function Pokedex() {
+  const [showCollection, setShowCollection] = useState(false);
+  const [activeCollection, setActiveCollection] = useState({});
+
+  function handleBackButton() {
+    setActiveCollection({});
+    setShowCollection(false);
+    localStorage.setItem("activeCollection", 0);
+  }
+  function handleSelectCollection(collection) {
+    setActiveCollection(collection);
+    setShowCollection(true);
+    localStorage.setItem("activeCollection", collection.id);
+  }
+  function handleUpdateCollection() {
+    const collections = JSON.parse(localStorage.getItem("collections"));
+    const collection = collections.find((coll) => {
+      return coll.id === activeCollection.id;
+    });
+    setActiveCollection(collection);
+  }
   return (
     <div className="container text-white bg-danger h-100 overflow-y-hidden">
       <div className="row border-bottom">
@@ -25,12 +47,24 @@ export default function Pokedex() {
         </div>
         <div className="col"></div>
       </div>
-      <div className="row h-100 border d-flex pb-4">
+      <div className="row h-100 border pb-4">
         <div className="col border-end h-100">
-          <LeftLayout />
+          <LeftLayout
+            activeCollection={activeCollection}
+            updateCollection={handleUpdateCollection}
+          />
         </div>
         <div className="col h-100">
-          <RightLayout />
+          {!showCollection && (
+            <RightLayout selectCollection={handleSelectCollection} />
+          )}
+          {showCollection && (
+            <Collection
+              collection={activeCollection}
+              back={handleBackButton}
+              updateCollection={handleUpdateCollection}
+            />
+          )}
         </div>
       </div>
     </div>

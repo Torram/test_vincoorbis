@@ -1,22 +1,28 @@
+"use client";
 import TypeTag from "@/common/TypeTag";
 import Image from "next/image";
 import notFound from "../../public/notFound.svg";
-import useCollection from "@/hooks/useCollection";
 import { useState } from "react";
+import useCollection from "@/hooks/useCollection";
 
-export default function CardResult({ pokemon, updateCollection }) {
-  const { newPokemon } = useCollection();
-  const [value, setValue] = useState(0);
+export default function Card({ pokemon, updateCollection }) {
+  const [value, setValue] = useState(pokemon.quantity);
+  const { subPokemon, addPokemon } = useCollection();
   const types = pokemon.types.map((type) => type.type.name);
-  function addPokemon() {
-    newPokemon({ ...pokemon, quantity: value });
-    updateCollection();
-  }
 
-  function handleChangeInput(e) {
+  function handleChangeQuantity(e) {
     setValue(e.target.value);
   }
-
+  function oneMore() {
+    setValue(parseInt(value) + 1);
+    addPokemon(pokemon.id);
+    updateCollection();
+  }
+  function oneLess() {
+    setValue(parseInt(value) - 1);
+    subPokemon(pokemon.id);
+    updateCollection();
+  }
   return (
     <div className="w-100 border text-center card p-0 m-0">
       <p>{pokemon.name.toUpperCase()}</p>
@@ -40,14 +46,17 @@ export default function CardResult({ pokemon, updateCollection }) {
         <div className="col text-center">
           <p className="mb-0">Cantidad:</p>
           <div>
+            <button className="btn btn-danger p-1" onClick={oneLess}>
+              -
+            </button>
             <input
               type="text"
               className="w-25 m-1 text-center"
               value={value}
-              onChange={handleChangeInput}
+              onChange={(e) => handleChangeQuantity(e)}
             />
-            <button className="btn btn-primary p-1" onClick={addPokemon}>
-              Agregar
+            <button className="btn btn-success p-1" onClick={oneMore}>
+              +
             </button>
           </div>
         </div>
